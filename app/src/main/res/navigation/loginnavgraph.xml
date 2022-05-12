@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/loginnavgraph"
+    app:startDestination="@id/loginFragment">
+
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.utn.apputnerds.fragments.LoginFragment"
+        android:label="login_fragment"
+        tools:layout="@layout/login_fragment" >
+        <action
+            android:id="@+id/action_loginFragment_to_navBarActivity"
+            app:destination="@id/navBarActivity" />
+        <action
+            android:id="@+id/action_loginFragment_to_createAccountFragment"
+            app:destination="@id/createAccountFragment" />
+    </fragment>
+    <activity
+        android:id="@+id/navBarActivity"
+        android:name="com.utn.apputnerds.activities.NavBarActivity"
+        android:label="activity_nav_bar"
+        tools:layout="@layout/activity_nav_bar" />
+    <fragment
+        android:id="@+id/createAccountFragment"
+        android:name="com.utn.apputnerds.fragments.CreateAccountFragment"
+        android:label="create_account_fragment"
+        tools:layout="@layout/create_account_fragment" />
+</navigation>
