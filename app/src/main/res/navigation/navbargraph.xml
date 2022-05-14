@@ -9,7 +9,11 @@
         android:id="@+id/userInfo"
         android:name="com.utn.apputnerds.fragments.DoctorInfoFragment"
         android:label="user_info_fragment"
-        tools:layout="@layout/doctor_info_fragment" />
+        tools:layout="@layout/doctor_info_fragment" >
+        <action
+            android:id="@+id/action_userInfo_to_settingsActivity"
+            app:destination="@id/settingsActivity" />
+    </fragment>
     <fragment
         android:id="@+id/listPatientFragment"
         android:name="com.utn.apputnerds.fragments.ListPatientFragment"
@@ -26,29 +30,37 @@
         android:id="@+id/container"
         android:name="com.utn.apputnerds.fragments.containertab.container"
         android:label="container_fragment"
-        tools:layout="@layout/container_fragment" />
-    <fragment
-        android:id="@+id/tabInfo"
-        android:name="com.utn.apputnerds.fragments.containertab.tabInfo"
-        android:label="tab_info_fragment"
-        tools:layout="@layout/tab_info_fragment" />
+        tools:layout="@layout/container_fragment" >
+        <action
+            android:id="@+id/action_container_to_addMedicalRecord"
+            app:destination="@id/addMedicalRecord" />
+    </fragment>
     <fragment
         android:id="@+id/addPatientFragment"
         android:name="com.utn.apputnerds.fragments.AddPatientFragment"
         android:label="add_patient_fragment"
         tools:layout="@layout/add_patient_fragment" />
     <fragment
-        android:id="@+id/listMedicalRecord"
-        android:name="com.utn.apputnerds.fragments.containertab.ListMedicalRecord"
-        android:label="list_medical_record_fragment"
-        tools:layout="@layout/list_medical_record_fragment" >
-        <action
-            android:id="@+id/action_listMedicalRecord_to_addMedicalRecord"
-            app:destination="@id/addMedicalRecord" />
-    </fragment>
-    <fragment
         android:id="@+id/addMedicalRecord"
         android:name="com.utn.apputnerds.fragments.containertab.AddMedicalRecord"
         android:label="add_medical_record_fragment"
-        tools:layout="@layout/add_medical_record_fragment" />
+        tools:layout="@layout/add_medical_record_fragment" >
+        <action
+            android:id="@+id/action_addMedicalRecord_to_container"
+            app:destination="@id/container" />
+    </fragment>
+    <fragment
+        android:id="@+id/listMedicalRecord"
+        android:name="com.utn.apputnerds.fragments.containertab.ListMedicalRecord"
+        android:label="list_medical_record_fragment"
+        tools:layout="@layout/list_medical_record_fragment" />
+    <fragment
+        android:id="@+id/tabInfo"
+        android:name="com.utn.apputnerds.fragments.containertab.tabInfo"
+        android:label="tab_info_fragment"
+        tools:layout="@layout/tab_info_fragment" />
+    <activity
+        android:id="@+id/settingsActivity"
+        android:name="com.utn.apputnerds.activities.SettingsActivity"
+        android:label="SettingsActivity" />
 </navigation>

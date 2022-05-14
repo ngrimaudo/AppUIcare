@@ -20,6 +20,7 @@
         android:id="@+id/btnAddPatient"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:backgroundTint="#2B2A2A"
         android:clickable="true"
         android:contentDescription="Agregar Paciente"
         android:src="@android:drawable/ic_input_add"

@@ -74,7 +74,7 @@ class ListPatientFragment : Fragment() {
         patientDao = db?.patientDao()
 
         val sharedPref: SharedPreferences = requireContext().getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)
-        var id = sharedPref.getInt("id", -1)
+        var id = sharedPref.getInt("idDoctor", -1)
         var doctor = doctorDao?.loadDoctorById(id) as Doctor
 
         var listPatients = patientDao?.getPatients(doctor.name)
@@ -106,14 +106,14 @@ class ListPatientFragment : Fragment() {
         patientDao = db?.patientDao()
         val sharedPref: SharedPreferences = requireContext().getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)
 
-        var id = sharedPref.getInt("id", -1)
+        var id = sharedPref.getInt("idDoctor", -1)
         var doctor = doctorDao?.loadDoctorById(id) as Doctor
 
         var listPatients = patientDao?.getPatients(doctor.name)
 
         val u = patientDao?.loadPatientById(listPatients!![position].id)
         val editor = sharedPref.edit()
-        editor.putInt("id", u!!.id)
+        editor.putInt("idPatient", u!!.id)
         editor.apply()
         v.findNavController().navigate(ListPatientFragmentDirections.actionListPatientFragmentToContainer())
     }

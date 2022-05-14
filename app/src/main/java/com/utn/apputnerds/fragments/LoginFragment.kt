@@ -66,10 +66,13 @@ class LoginFragment : Fragment() {
 
             val username = doctorDao?.validate(user.text.toString(), password.text.toString())
             if (username != null) {
+                Snackbar.make(v,"Ingreso exitoso", Snackbar.LENGTH_SHORT).show()
+                user.setText("")
+                password.setText("")
                 val u = doctorDao?.loadDoctorByName(username)
                 val action = LoginFragmentDirections.actionLoginFragmentToNavBarActivity()
                 val editor = sharedPref.edit()
-                editor.putInt("id", u!!.id)
+                editor.putInt("idDoctor", u!!.id)
                 editor.apply()
                 v.findNavController().navigate(action)
             }

@@ -76,7 +76,7 @@ class ListMedicalRecord : Fragment() {
         medicalrecordDao = db?.medicalrecordDao()
 
         val sharedPref: SharedPreferences = requireContext().getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)
-        var id = sharedPref.getInt("id", -1)
+        var id = sharedPref.getInt("idPatient", -1)
         var patient = patientDao?.loadPatientById(id) as Patient
 
         var listMedicalRecord = medicalrecordDao?.selectMedicalRecordByPatient(patient.name)
@@ -97,7 +97,7 @@ class ListMedicalRecord : Fragment() {
 
         btnAddMedicalRecord.setOnClickListener {
 
-            val action = ListMedicalRecordDirections.actionListMedicalRecordToAddMedicalRecord()
+            val action = containerDirections.actionContainerToAddMedicalRecord()
             v.findNavController().navigate(action)
         }
 

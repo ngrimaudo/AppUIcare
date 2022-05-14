@@ -56,7 +56,7 @@ class tabInfo : Fragment() {
         patientDao = db?.patientDao()
 
         val sharedPref: SharedPreferences = requireContext().getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)
-        var id = sharedPref.getInt("id", -1)
+        var id = sharedPref.getInt("idPatient", -1)
         var patient = patientDao?.loadPatientById(id) as Patient
 
         name.text = "${patient.name}"

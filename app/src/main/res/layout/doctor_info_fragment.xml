@@ -8,6 +8,16 @@
     tools:context=".fragments.DoctorInfoFragment">
 
     <TextView
+        android:id="@+id/txtParagraphCountPatient2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Configuracion"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/guideline9"
+        app:layout_constraintTop_toTopOf="@+id/guideline11" />
+
+    <TextView
         android:id="@+id/txtGreeting"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -90,5 +100,20 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/txtParagraphCountPatient"
         app:layout_constraintTop_toTopOf="@+id/guideline12" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/btnSettings"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#F4EFF0"
+        android:backgroundTint="#2B2A2A"
+        android:clickable="true"
+        android:src="@android:drawable/ic_menu_preferences"
+        app:backgroundTint="#FFEBEE"
+        app:elevation="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/guideline9"
+        app:layout_constraintTop_toBottomOf="@+id/txtCountPatient" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

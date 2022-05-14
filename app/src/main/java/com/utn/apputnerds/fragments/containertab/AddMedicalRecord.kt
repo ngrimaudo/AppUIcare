@@ -11,6 +11,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
 import com.utn.apputnerds.R
 import com.utn.apputnerds.database.appDatabase
@@ -67,7 +69,7 @@ class AddMedicalRecord : Fragment() {
         medicalrecordDao = db?.medicalrecordDao()
 
         val sharedPref: SharedPreferences = requireContext().getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)
-        var id = sharedPref.getInt("id", -1)
+        var id = sharedPref.getInt("idPatient", -1)
         var patient = patientDao?.loadPatientById(id) as Patient
 
 
@@ -81,6 +83,10 @@ class AddMedicalRecord : Fragment() {
                 Snackbar.make(v,"Creacion exitosa", Snackbar.LENGTH_SHORT).show()
                 diagnosis.setText("")
                 treatment.setText("")
+
+                val action = AddMedicalRecordDirections.actionAddMedicalRecordToContainer()
+                v.findNavController().navigate(action)
+
             }
             else {
                 Snackbar.make(v,"Creacion incorrecta", Snackbar.LENGTH_SHORT).show()

@@ -9,6 +9,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.navigation.findNavController
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.utn.apputnerds.R
 import com.utn.apputnerds.database.appDatabase
 import com.utn.apputnerds.database.doctorDao
@@ -34,6 +36,7 @@ class DoctorInfoFragment : Fragment() {
     lateinit var name: TextView
     lateinit var mail: TextView
     lateinit var countPatient: TextView
+    lateinit var btnSettings: FloatingActionButton
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -46,6 +49,8 @@ class DoctorInfoFragment : Fragment() {
         mail = v.findViewById(R.id.txtSelfie)
         countPatient = v.findViewById(R.id.txtCountPatient)
 
+        btnSettings = v.findViewById(R.id.btnSettings)
+
         return v
     }
 
@@ -57,7 +62,7 @@ class DoctorInfoFragment : Fragment() {
         patientDao = db?.patientDao()
 
         val sharedPref: SharedPreferences = requireContext().getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)
-        var id = sharedPref.getInt("id", -1)
+        var id = sharedPref.getInt("idDoctor", -1)
         var doctor = doctorDao?.loadDoctorById(id) as Doctor
         var qtyPatient = patientDao?.qtyPatientByDoctor(doctor.name) as Int
 
@@ -65,6 +70,12 @@ class DoctorInfoFragment : Fragment() {
         mail.text = "${doctor.mail}"
         speciality.text = "${doctor.speciality}"
         countPatient.text = "$qtyPatient"
+
+
+        btnSettings.setOnClickListener(){
+            val action = DoctorInfoFragmentDirections.actionUserInfoToSettingsActivity()
+            v.findNavController().navigate(action)
+        }
 
 
     }

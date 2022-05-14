@@ -1,18 +1,20 @@
 package com.utn.apputnerds.fragments.containertab
 
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
+import androidx.lifecycle.ViewModelProvider
+import androidx.viewpager.widget.PagerAdapter.POSITION_NONE
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import com.utn.apputnerds.R
 import com.utn.apputnerds.viewmodels.ContainerViewModel
+
 
 class container : Fragment() {
 
@@ -36,6 +38,7 @@ class container : Fragment() {
 
         viewPager = v.findViewById(R.id.view_pager)
 
+
         return v
     }
 
@@ -48,14 +51,15 @@ class container : Fragment() {
     override fun onStart() {
         super.onStart()
 
+        viewPager.offscreenPageLimit = 1
         viewPager.setAdapter(ViewPagerAdapter(requireActivity()))
+
         // viewPager.isUserInputEnabled = false
 
         TabLayoutMediator(tabLayout, viewPager, TabLayoutMediator.TabConfigurationStrategy { tab, position ->
             when (position) {
                 0 -> tab.text = "Perfil"
                 1 -> tab.text = "Historia Clínica"
-                2 -> tab.text = "Agregar a Historia"
                 else -> tab.text = "undefined"
             }
         }).attach()
@@ -66,7 +70,6 @@ class container : Fragment() {
             return when(position){
                 0 -> tabInfo()
                 1 -> ListMedicalRecord()
-                2 -> AddMedicalRecord()
 
                 else -> tabInfo()
             }
@@ -77,8 +80,13 @@ class container : Fragment() {
         }
 
         companion object {
-            private const val TAB_COUNT = 3
+            private const val TAB_COUNT = 2
         }
+    }
+
+    fun getItemPosition(`object`: Any?): Int {
+        // POSITION_NONE makes it possible to reload the PagerAdapter
+        return POSITION_NONE
     }
 
 }
