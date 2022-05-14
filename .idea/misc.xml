@@ -6,9 +6,15 @@
         <entry key="../../../../../../../layout/custom_preview.xml" value="0.20729166666666668" />
         <entry key="app/src/main/res/layout/activity_nav_bar.xml" value="0.2864583333333333" />
         <entry key="app/src/main/res/layout/activity_settings.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/activity_splash_screen.xml" value="0.22" />
         <entry key="app/src/main/res/layout/container_fragment.xml" value="0.14402173913043478" />
         <entry key="app/src/main/res/layout/doctor_info_fragment.xml" value="0.22" />
+        <entry key="app/src/main/res/layout/forgotten_password_fragment.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/list_medical_record_fragment.xml" value="0.151268115942029" />
         <entry key="app/src/main/res/layout/list_patient_fragment.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/login_fragment.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/patient_fragment.xml" value="0.151268115942029" />
+        <entry key="app/src/main/res/layout/tab_info_fragment.xml" value="0.151268115942029" />
         <entry key="app/src/main/res/xml/root_preferences.xml" value="0.33" />
       </map>
     </option>

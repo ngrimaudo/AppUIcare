@@ -66,7 +66,7 @@ class CreateAccountFragment : Fragment() {
             val username = doctorDao?.validate(user.text.toString(), password.text.toString())
             if (username == null && (user.text.toString() != null) && (password.text.toString() != null) && (mail.text.toString() != null) && (speciality.text.toString() != null)) {
                 var newDoctor = Doctor(user.text.toString(),password.text.toString(), mail.text.toString(), speciality.text.toString())
-                val u = doctorDao?.insertDoctor(newDoctor)
+                doctorDao?.insertDoctor(newDoctor)
                 Snackbar.make(v,"Creacion exitosa", Snackbar.LENGTH_SHORT).show()
                 user.setText("")
                 password.setText("")

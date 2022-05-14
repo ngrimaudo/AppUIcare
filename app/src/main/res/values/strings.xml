@@ -4,6 +4,11 @@
 
     <string name="title_activity_settings">Settings</string>
 
+    <!-- Dark Mode -->
+    <string name="theme">Tema</string>
+    <string name="dark_mode_setter">Modo Oscuro</string>
+
+
     <!-- Preference Titles -->
     <string name="messages_header">Messages</string>
     <string name="sync_header">Sync</string>

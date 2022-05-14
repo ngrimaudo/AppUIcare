@@ -16,6 +16,9 @@
         <action
             android:id="@+id/action_loginFragment_to_createAccountFragment"
             app:destination="@id/createAccountFragment" />
+        <action
+            android:id="@+id/action_loginFragment_to_forgottenPassword"
+            app:destination="@id/forgottenPassword" />
     </fragment>
     <activity
         android:id="@+id/navBarActivity"
@@ -27,4 +30,9 @@
         android:name="com.utn.apputnerds.fragments.CreateAccountFragment"
         android:label="create_account_fragment"
         tools:layout="@layout/create_account_fragment" />
+    <fragment
+        android:id="@+id/forgottenPassword"
+        android:name="com.utn.apputnerds.fragments.ForgottenPassword"
+        android:label="forgotten_password_fragment"
+        tools:layout="@layout/forgotten_password_fragment" />
 </navigation>

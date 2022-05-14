@@ -32,6 +32,7 @@ class LoginFragment : Fragment() {
 
     lateinit var btnLogin: Button
     lateinit var btnCreateAccount: Button
+    lateinit var btnForgetPassword: Button
 
     lateinit var password: EditText
     lateinit var user: EditText
@@ -48,6 +49,7 @@ class LoginFragment : Fragment() {
 
         btnLogin = v.findViewById(R.id.btnCreateDoctor)
         btnCreateAccount = v.findViewById(R.id.btnCreateAccount)
+        btnForgetPassword = v.findViewById(R.id.btnForgetPassword)
 
         return v
     }
@@ -83,6 +85,11 @@ class LoginFragment : Fragment() {
 
         btnCreateAccount.setOnClickListener {
             val action = LoginFragmentDirections.actionLoginFragmentToCreateAccountFragment()
+            v.findNavController().navigate(action)
+        }
+
+        btnForgetPassword.setOnClickListener {
+            val action = LoginFragmentDirections.actionLoginFragmentToForgottenPassword()
             v.findNavController().navigate(action)
         }
     }
