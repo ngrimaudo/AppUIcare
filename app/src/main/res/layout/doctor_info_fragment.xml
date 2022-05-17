@@ -5,12 +5,14 @@
     android:id="@+id/frameLayout3"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:elevation="1dp"
     tools:context=".fragments.DoctorInfoFragment">
 
     <TextView
         android:id="@+id/txtParagraphCountPatient2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:elevation="16dp"
         android:text="Configuracion"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -105,15 +107,23 @@
         android:id="@+id/btnSettings"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="#F4EFF0"
-        android:backgroundTint="#2B2A2A"
         android:clickable="true"
+        android:elevation="16dp"
         android:src="@android:drawable/ic_menu_preferences"
-        app:backgroundTint="#FFEBEE"
         app:elevation="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/guideline9"
         app:layout_constraintTop_toBottomOf="@+id/txtCountPatient" />
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="85dp"
+        android:layout_height="70dp"
+        android:src="@drawable/uicare"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/guideline9"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtParagraphCountPatient" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

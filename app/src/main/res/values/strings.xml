@@ -8,6 +8,9 @@
     <string name="theme">Tema</string>
     <string name="dark_mode_setter">Modo Oscuro</string>
 
+    <string name="sound">Sonidos</string>
+    <string name="sound_on_click">Sonido en botones</string>
+
 
     <!-- Preference Titles -->
     <string name="messages_header">Messages</string>

@@ -2,6 +2,7 @@ package com.utn.apputnerds.fragments
 
 import android.content.Context
 import android.content.SharedPreferences
+import android.media.MediaPlayer
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import android.text.Layout
@@ -11,6 +12,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import androidx.navigation.findNavController
+import androidx.preference.PreferenceManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -39,6 +41,8 @@ class ListPatientFragment : Fragment() {
     private lateinit var patientListAdapter: PatientListAdapter
     private lateinit var btnAddPatient: FloatingActionButton
 
+    lateinit var mp: MediaPlayer
+
     var patient : MutableList<Patient> = ArrayList<Patient>()
 
     companion object {
@@ -57,6 +61,8 @@ class ListPatientFragment : Fragment() {
 
         btnAddPatient = v.findViewById(R.id.btnAddPatient)
 
+        mp = MediaPlayer.create(requireActivity().applicationContext,R.raw.click)
+
         return v
     }
 
@@ -68,6 +74,8 @@ class ListPatientFragment : Fragment() {
 
     override fun onStart() {
         super.onStart()
+
+        val prefs = PreferenceManager.getDefaultSharedPreferences(requireContext())
 
         db = appDatabase.getAppDataBase(v.context)
         doctorDao = db?.doctorDao()
@@ -85,6 +93,12 @@ class ListPatientFragment : Fragment() {
 
         patientListAdapter = PatientListAdapter(listPatients,requireContext()){ pos->
             onItemClick(pos)
+
+            if (prefs.getBoolean("sound",false)) {
+
+                mp.start()
+
+            }
 
 
         }

@@ -65,4 +65,14 @@
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.75" />
 
+    <ImageView
+        android:id="@+id/imageView6"
+        android:layout_width="151dp"
+        android:layout_height="141dp"
+        android:src="@drawable/uicare"
+        app:layout_constraintBottom_toTopOf="@+id/btnAddMedicalRecord"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtTreatment" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

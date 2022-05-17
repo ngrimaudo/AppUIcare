@@ -1,5 +1,6 @@
 package com.utn.apputnerds.fragments
 
+import android.media.MediaPlayer
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -8,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
+import androidx.preference.PreferenceManager
 import com.google.android.material.snackbar.Snackbar
 import com.utn.apputnerds.R
 import com.utn.apputnerds.database.appDatabase
@@ -35,6 +37,8 @@ class ForgottenPassword : Fragment() {
 
     lateinit var btnUpdatePassword: Button
 
+    lateinit var mp: MediaPlayer
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -49,11 +53,15 @@ class ForgottenPassword : Fragment() {
 
         btnUpdatePassword = v.findViewById(R.id.btnUpdatePassword)
 
+        mp = MediaPlayer.create(requireActivity().applicationContext,R.raw.click)
+
         return v
     }
 
     override fun onStart() {
         super.onStart()
+
+        val prefs = PreferenceManager.getDefaultSharedPreferences(requireContext())
 
         db = appDatabase.getAppDataBase(v.context)
         doctorDao = db?.doctorDao()
@@ -61,7 +69,11 @@ class ForgottenPassword : Fragment() {
 
         btnUpdatePassword.setOnClickListener {
 
+            if (prefs.getBoolean("sound",false)) {
 
+                mp.start()
+
+            }
 
             if ((user.text.toString() != null) && (password.text.toString() != null) && (adminPassword.text.toString() == "Admin") && (adminUser.text.toString() == "Admin") && (doctorDao?.isDoctorAvailable(user.text.toString(), user.text.toString()) == 1)) {
                 var doctor = doctorDao?.loadDoctorByName(user.text.toString())

@@ -2,6 +2,7 @@ package com.utn.apputnerds.fragments
 
 import android.content.Context
 import android.content.SharedPreferences
+import android.media.MediaPlayer
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -10,6 +11,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
+import androidx.preference.PreferenceManager
 import com.google.android.material.snackbar.Snackbar
 import com.utn.apputnerds.R
 import com.utn.apputnerds.database.appDatabase
@@ -40,6 +42,8 @@ class AddPatientFragment : Fragment() {
 
     lateinit var btnAddPatient: Button
 
+    lateinit var mp: MediaPlayer
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -52,26 +56,34 @@ class AddPatientFragment : Fragment() {
 
         btnAddPatient = v.findViewById(R.id.btnAddPatient)
 
+        mp = MediaPlayer.create(requireActivity().applicationContext,R.raw.click)
+
         return v
     }
 
     override fun onStart() {
         super.onStart()
 
+        val prefs = PreferenceManager.getDefaultSharedPreferences(requireContext())
+
         db = appDatabase.getAppDataBase(v.context)
         doctorDao = db?.doctorDao()
         patientDao = db?.patientDao()
 
         val sharedPref: SharedPreferences = requireContext().getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)
-        var id = sharedPref.getInt("id", -1)
+        var id = sharedPref.getInt("idDoctor", -1)
         var doctor = doctorDao?.loadDoctorById(id) as Doctor
 
 
         btnAddPatient.setOnClickListener {
 
+            if (prefs.getBoolean("sound",false)) {
 
+                mp.start()
 
-            val patient = patientDao?.validate(name.text.toString(), "Nahuel")
+            }
+
+            val patient = patientDao?.validate(name.text.toString(), doctor.name)
             if (patient == null && (name.text.toString() != null) && (edad.text.toString() != null) && (lastname.text.toString() != null)) {
                 var newPatient = Patient(name.text.toString(), lastname.text.toString(), edad.text.toString().toInt(), "  ", doctor.name)
                 val u = patientDao?.insertPatient(newPatient)

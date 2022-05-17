@@ -2,6 +2,7 @@ package com.utn.apputnerds.fragments
 
 import android.content.Context
 import android.content.SharedPreferences
+import android.media.MediaPlayer
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -10,6 +11,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.navigation.findNavController
+import androidx.preference.PreferenceManager
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.utn.apputnerds.R
 import com.utn.apputnerds.database.appDatabase
@@ -38,6 +40,8 @@ class DoctorInfoFragment : Fragment() {
     lateinit var countPatient: TextView
     lateinit var btnSettings: FloatingActionButton
 
+    lateinit var mp: MediaPlayer
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -51,11 +55,15 @@ class DoctorInfoFragment : Fragment() {
 
         btnSettings = v.findViewById(R.id.btnSettings)
 
+        mp = MediaPlayer.create(requireActivity().applicationContext,R.raw.click)
+
         return v
     }
 
     override fun onStart() {
         super.onStart()
+
+        val prefs = PreferenceManager.getDefaultSharedPreferences(requireContext())
 
         db = appDatabase.getAppDataBase(v.context)
         doctorDao = db?.doctorDao()
@@ -73,6 +81,13 @@ class DoctorInfoFragment : Fragment() {
 
 
         btnSettings.setOnClickListener(){
+
+            if (prefs.getBoolean("sound",false)) {
+
+                mp.start()
+
+            }
+
             val action = DoctorInfoFragmentDirections.actionUserInfoToSettingsActivity()
             v.findNavController().navigate(action)
         }

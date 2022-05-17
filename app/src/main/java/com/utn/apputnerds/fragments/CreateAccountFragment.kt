@@ -1,5 +1,6 @@
 package com.utn.apputnerds.fragments
 
+import android.media.MediaPlayer
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -8,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
+import androidx.preference.PreferenceManager
 import com.google.android.material.snackbar.Snackbar
 import com.utn.apputnerds.R
 import com.utn.apputnerds.database.appDatabase
@@ -35,6 +37,8 @@ class CreateAccountFragment : Fragment() {
 
     lateinit var btnCreateDoctor: Button
 
+    lateinit var mp: MediaPlayer
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -49,11 +53,15 @@ class CreateAccountFragment : Fragment() {
 
         btnCreateDoctor = v.findViewById(R.id.btnCreateDoctor)
 
+        mp = MediaPlayer.create(requireActivity().applicationContext,R.raw.click)
+
         return v
     }
 
     override fun onStart() {
         super.onStart()
+
+        val prefs = PreferenceManager.getDefaultSharedPreferences(requireContext())
 
         db = appDatabase.getAppDataBase(v.context)
         doctorDao = db?.doctorDao()
@@ -61,6 +69,11 @@ class CreateAccountFragment : Fragment() {
 
         btnCreateDoctor.setOnClickListener {
 
+            if (prefs.getBoolean("sound",false)) {
+
+                mp.start()
+
+            }
 
 
             val username = doctorDao?.validate(user.text.toString(), password.text.toString())

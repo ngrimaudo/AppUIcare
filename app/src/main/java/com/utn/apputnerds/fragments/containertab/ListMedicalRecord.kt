@@ -2,6 +2,7 @@ package com.utn.apputnerds.fragments.containertab
 
 import android.content.Context
 import android.content.SharedPreferences
+import android.media.MediaPlayer
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -9,6 +10,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
+import androidx.preference.PreferenceManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -39,6 +41,8 @@ class ListMedicalRecord : Fragment() {
     private lateinit var medicalrecordListAdapter: MedicalRecordListAdapter
     private lateinit var btnAddMedicalRecord: FloatingActionButton
 
+    lateinit var mp: MediaPlayer
+
     var medicalrecord : MutableList<MedicalRecord> = ArrayList<MedicalRecord>()
 
     companion object {
@@ -58,6 +62,8 @@ class ListMedicalRecord : Fragment() {
         btnAddMedicalRecord = v.findViewById(R.id.btnAddMedicalRecord)
 
 
+        mp = MediaPlayer.create(requireActivity().applicationContext,R.raw.click)
+
         return v
     }
 
@@ -69,6 +75,9 @@ class ListMedicalRecord : Fragment() {
 
     override fun onStart() {
         super.onStart()
+
+        val prefs = PreferenceManager.getDefaultSharedPreferences(requireContext())
+
 
         db = appDatabase.getAppDataBase(v.context)
         doctorDao = db?.doctorDao()
@@ -88,6 +97,12 @@ class ListMedicalRecord : Fragment() {
         medicalrecordListAdapter = MedicalRecordListAdapter(listMedicalRecord,requireContext()){ pos->
             onItemClick(pos)
 
+            if (prefs.getBoolean("sound",false)) {
+
+                mp.start()
+
+            }
+
 
         }
 
@@ -96,6 +111,12 @@ class ListMedicalRecord : Fragment() {
         recMedicalRecord.adapter = medicalrecordListAdapter
 
         btnAddMedicalRecord.setOnClickListener {
+
+            if (prefs.getBoolean("sound",false)) {
+
+                mp.start()
+
+            }
 
             val action = containerDirections.actionContainerToAddMedicalRecord()
             v.findNavController().navigate(action)

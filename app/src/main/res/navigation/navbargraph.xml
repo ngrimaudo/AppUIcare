@@ -34,6 +34,9 @@
         <action
             android:id="@+id/action_container_to_addMedicalRecord"
             app:destination="@id/addMedicalRecord" />
+        <action
+            android:id="@+id/action_container_to_listPatientFragment"
+            app:destination="@id/listPatientFragment" />
     </fragment>
     <fragment
         android:id="@+id/addPatientFragment"

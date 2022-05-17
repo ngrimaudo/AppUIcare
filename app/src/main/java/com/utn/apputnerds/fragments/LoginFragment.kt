@@ -2,6 +2,7 @@ package com.utn.apputnerds.fragments
 
 import android.content.Context
 import android.content.SharedPreferences
+import android.media.MediaPlayer
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -10,7 +11,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.navigation.findNavController
+import androidx.preference.PreferenceManager
 import com.google.android.material.snackbar.Snackbar
 import com.utn.apputnerds.R
 import com.utn.apputnerds.database.appDatabase
@@ -37,6 +40,8 @@ class LoginFragment : Fragment() {
     lateinit var password: EditText
     lateinit var user: EditText
 
+    lateinit var mp: MediaPlayer
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -51,11 +56,21 @@ class LoginFragment : Fragment() {
         btnCreateAccount = v.findViewById(R.id.btnCreateAccount)
         btnForgetPassword = v.findViewById(R.id.btnForgetPassword)
 
+        mp = MediaPlayer.create(requireActivity().applicationContext,R.raw.click)
+
         return v
     }
 
     override fun onStart() {
         super.onStart()
+
+        val prefs = PreferenceManager.getDefaultSharedPreferences(requireContext())
+
+        if (prefs.getBoolean("theme",false)) {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+        } else {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+        }
 
         db = appDatabase.getAppDataBase(v.context)
         doctorDao = db?.doctorDao()
@@ -65,6 +80,12 @@ class LoginFragment : Fragment() {
 
 
         btnLogin.setOnClickListener {
+
+            if (prefs.getBoolean("sound",false)) {
+
+                mp.start()
+
+            }
 
             val username = doctorDao?.validate(user.text.toString(), password.text.toString())
             if (username != null) {
